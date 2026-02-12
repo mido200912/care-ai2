@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLang } from '../../context/LanguageContext';
+import { useAuth } from '../../context/AuthContext';
 import './Hero.css';
 
 const Hero = () => {
     const { t } = useLang();
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
     const [displayedText, setDisplayedText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -30,6 +34,13 @@ const Hero = () => {
         return () => clearTimeout(timer);
     }, [currentIndex, isDeleting, fullText]);
 
+    const scrollToAbout = () => {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section className="hero" id="hero">
             <div className="container hero-container">
@@ -42,10 +53,16 @@ const Hero = () => {
                         {t('hero.subtitle') || "Connect with hospitals, manage health, and get AI advice."}
                     </p>
                     <div className="hero-buttons fade-in">
-                        <button className="btn btn-primary btn-lg glow-effect">
-                            {t('hero.cta') || "Get Started"}
+                        <button
+                            onClick={() => isAuthenticated ? navigate('/dashboard') : navigate('/register')}
+                            className="btn btn-primary btn-lg glow-effect"
+                        >
+                            {isAuthenticated ? "Go Dashboard" : (t('hero.cta') || "Get Started")}
                         </button>
-                        <button className="btn btn-secondary btn-lg">
+                        <button
+                            onClick={scrollToAbout}
+                            className="btn btn-secondary btn-lg"
+                        >
                             {t('hero.secondaryCta') || "Learn More"}
                         </button>
                     </div>
