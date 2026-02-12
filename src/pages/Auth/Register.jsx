@@ -56,7 +56,7 @@ const Register = () => {
         setLoading(false);
 
         if (result.success) {
-            navigate('/dashboard');
+            navigate('/medical-profile');
         } else {
             setError(result.message);
         }

@@ -26,9 +26,9 @@ const ProtectedRoute = ({ children }) => {
 };
 
 // Public Route (redirect if logged in)
-const PublicRoute = ({ children }) => {
+const PublicRoute = ({ children, redirectTo = "/dashboard" }) => {
   const { isAuthenticated } = useAuth();
-  return !isAuthenticated ? children : <Navigate to="/dashboard" />;
+  return !isAuthenticated ? children : <Navigate to={redirectTo} />;
 };
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Route path="/register" element={<PublicRoute redirectTo="/medical-profile"><Register /></PublicRoute>} />
         <Route path="/hospitals" element={<Hospitals />} />
 
         {/* Protected Routes */}
