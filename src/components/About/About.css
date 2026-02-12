@@ -1,0 +1,235 @@
+.about-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    opacity: 0.1;
+    filter: blur(100px);
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--text), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.about-item {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+[dir="rtl"] .about-item {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.about-item:hover {
+    background: rgba(6, 182, 212, 0.05);
+    transform: translateX(10px);
+}
+
+[dir="rtl"] .about-item:hover {
+    transform: translateX(-10px);
+}
+
+.check-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    animation: pulse-icon 2s infinite;
+}
+
+@keyframes pulse-icon {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 6px 25px rgba(6, 182, 212, 0.5);
+    }
+}
+
+.about-item h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.about-item p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.about-stats {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: var(--background);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: scaleX(0);
+    transition: transform 0.4s;
+}
+
+.stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: var(--primary);
+    box-shadow: 0 15px 40px rgba(6, 182, 212, 0.2);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: bounce-icon 2s infinite;
+}
+
+@keyframes bounce-icon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.75rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.875rem;
+    display: block;
+}
+
+/* Animate stats on scroll */
+.stat-card:nth-child(1) {
+    animation: fadeInScale 0.6s ease-out 0.1s backwards;
+}
+
+.stat-card:nth-child(2) {
+    animation: fadeInScale 0.6s ease-out 0.2s backwards;
+}
+
+.stat-card:nth-child(3) {
+    animation: fadeInScale 0.6s ease-out 0.3s backwards;
+}
+
+.stat-card:nth-child(4) {
+    animation: fadeInScale 0.6s ease-out 0.4s backwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .about-item:hover {
+        transform: translateX(0);
+    }
+}
